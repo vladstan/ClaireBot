@@ -24,10 +24,10 @@ class EventsHandler {
 
     await this.initDatabaseData();
 
-    if (this.data.user.botMuted) {
-      log.debug('bot is muted for this user, skipping');
-      return;
-    }
+    // if (this.data.user.botMuted) {
+    //   log.debug('bot is muted for this user, skipping');
+    //   return;
+    // }
 
     this.witBot.init(this.data);
 

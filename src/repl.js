@@ -101,10 +101,10 @@ async function evalMessage(cmd: string) {
     return responses;
   }
 
-  if (data.user.botMuted) {
-    log.debug('bot is muted for this user, skipping');
-    return '<muted>';
-  }
+  // if (data.user.botMuted) {
+  //   log.debug('bot is muted for this user, skipping');
+  //   return '<muted>';
+  // }
 
   const responses = await witBot.process(cmd);
   if (!responses.length) {
