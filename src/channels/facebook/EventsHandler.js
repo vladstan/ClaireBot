@@ -52,7 +52,12 @@ class EventsHandler {
   }
 
   async saveDatabaseData() {
-    const docs = Object.values(this.data);
+    const docs = [
+      this.data.user,
+      this.data.session,
+      this.data.profile,
+      this.data.memory,
+    ];
     const tasks = docs.map((doc) => doc.save());
     await Promise.all(tasks);
   }

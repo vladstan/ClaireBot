@@ -74,7 +74,12 @@ async function initDatabaseData(): Promise<void> {
 }
 
 async function saveDatabaseData(): Promise<void> {
-  const docs = Object.values(data);
+  const docs = [
+    data.user,
+    data.session,
+    data.profile,
+    data.memory,
+  ];
   const tasks = docs.map((doc) => doc.save());
   await Promise.all(tasks);
 }

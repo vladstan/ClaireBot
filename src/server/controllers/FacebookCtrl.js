@@ -42,16 +42,21 @@ class FacebookCtrl {
       ctx.throw(400, 'unknown object type: ' + body.object);
     }
 
-    const eventsBySenderId = this.entriesToGroupedEvents(body.entry);
-    const eventsHandler = new EventsHandler(this.config);
+    try {
+      const eventsBySenderId = this.entriesToGroupedEvents(body.entry);
+      const eventsHandler = new EventsHandler(this.config);
 
-    const tasks = Object
-      .entries(eventsBySenderId)
-      .map(async ([senderId, events]) => {
-        await eventsHandler.process(senderId, events);
-      });
+      const tasks = Object
+        .entries(eventsBySenderId)
+        .map(async ([senderId, events]) => {
+          await eventsHandler.process(senderId, events);
+        });
 
-    await Promise.all(tasks);
+      await Promise.all(tasks);
+    } catch (ex) {
+      log.error('error in webhook endpoint:', ex);
+    }
+
     ctx.body = 'ok';
   }
 
